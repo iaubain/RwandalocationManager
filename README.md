@@ -1,0 +1,2 @@
+# RwandalocationManager
+Oltranz Ltd. This is a privately owned app by Oltanz Ltd which serves as a core app in charge of managing Rwanda locations until cell level. The location are managed using names or their correponding IDs. The module is command based. For more info please contact the developper or Oltranz Company. This module is written by Aubain. iaubain@yahoo.fr / aubain.c.ishimwe@oltranz.com Tel: +250 785 534 672 / +250 736 864 662. Thanks to grand support from Rene Manzi Christian Oltranz ltd CEO and R&D team leader.
