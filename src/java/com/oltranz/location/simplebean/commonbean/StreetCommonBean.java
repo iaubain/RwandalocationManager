@@ -10,17 +10,17 @@ package com.oltranz.location.simplebean.commonbean;
  * @author ISHIMWE Aubain Consolateur. email: iaubain@yahoo.fr /
  * aubain.c.ishimwe@oltranz.com Tel: +250 785 534 672 / +250 736 864 662
  */
-public class StreetBean {
+public class StreetCommonBean {
     private String cellId;
     private String streetId;
     private String streetName;
     private String longitude;
     private String latitude;
 
-    public StreetBean() {
+    public StreetCommonBean() {
     }
 
-    public StreetBean(String cellId, String streetId, String streetName, String longitude, String latitude) {
+    public StreetCommonBean(String cellId, String streetId, String streetName, String longitude, String latitude) {
         this.cellId = cellId;
         this.streetId = streetId;
         this.streetName = streetName;

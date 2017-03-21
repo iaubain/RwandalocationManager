@@ -16,11 +16,15 @@ import com.oltranz.location.facades.DistrictFacade;
 import com.oltranz.location.facades.ProvinceFacade;
 import com.oltranz.location.facades.SectorFacade;
 import com.oltranz.location.facades.StreetFacade;
-import com.oltranz.location.simplebean.commonbean.CellBean;
-import com.oltranz.location.simplebean.commonbean.DistrictBean;
-import com.oltranz.location.simplebean.commonbean.ProvinceBean;
-import com.oltranz.location.simplebean.commonbean.SectorBean;
-import com.oltranz.location.simplebean.commonbean.StreetBean;
+import com.oltranz.location.simplebean.cell.CellBean;
+import com.oltranz.location.simplebean.commonbean.CellCommonBean;
+import com.oltranz.location.simplebean.commonbean.DistrictCommonBean;
+import com.oltranz.location.simplebean.commonbean.ProvinceCommonBean;
+import com.oltranz.location.simplebean.commonbean.SectorCommonBean;
+import com.oltranz.location.simplebean.commonbean.StreetCommonBean;
+import com.oltranz.location.simplebean.district.DistrictBean;
+import com.oltranz.location.simplebean.province.ProvinceBean;
+import com.oltranz.location.simplebean.sector.SectorBean;
 import com.oltranz.location.utilities.DataFactory;
 import com.oltranz.location.utilities.RequestResponse;
 import static java.lang.System.out;
@@ -50,17 +54,17 @@ public class AppProcessor {
     
     public Response getAllData(){
         try{
-            List<ProvinceBean> mProvince = new ArrayList<>();
-            List<DistrictBean> mDistricts = new ArrayList<>();
-            List<SectorBean> mSectors = new ArrayList<>();
-            List<CellBean> mCells = new ArrayList<>();
-            List<StreetBean> mStreets = new ArrayList<>();
+            List<ProvinceCommonBean> mProvince = new ArrayList<>();
+            List<DistrictCommonBean> mDistricts = new ArrayList<>();
+            List<SectorCommonBean> mSectors = new ArrayList<>();
+            List<CellCommonBean> mCells = new ArrayList<>();
+            List<StreetCommonBean> mStreets = new ArrayList<>();
             
-            DistrictBean districtBean = new DistrictBean();
-            SectorBean sectorBean = new SectorBean();
-            CellBean cellBean = new CellBean();
-            StreetBean streetBean;
-            ProvinceBean provinceBean = new ProvinceBean();
+            DistrictCommonBean districtBean = new DistrictCommonBean();
+            SectorCommonBean sectorBean = new SectorCommonBean();
+            CellCommonBean cellBean = new CellCommonBean();
+            StreetCommonBean streetBean;
+            ProvinceCommonBean provinceBean = new ProvinceCommonBean();
             
             List<Street> streets;
             List<Cell> cells;
@@ -112,7 +116,7 @@ public class AppProcessor {
                             
                             if(streets != null){
                                 for(Street street : streets){
-                                    streetBean = new StreetBean(cell.getId()+"",
+                                    streetBean = new StreetCommonBean(cell.getId()+"",
                                             street.getId()+"",
                                             street.getName(),
                                             street.getLongitude() != null ? street.getLongitude() : "",
@@ -123,24 +127,24 @@ public class AppProcessor {
                             cellBean.setStreets(mStreets);
                             mCells.add(cellBean);
                             mStreets = new ArrayList<>();
-                            cellBean = new CellBean();
+                            cellBean = new CellCommonBean();
                         }
                         
                         sectorBean.setCells(mCells);
                         mSectors.add(sectorBean);
                         mCells= new ArrayList<>();
-                        sectorBean = new SectorBean();
+                        sectorBean = new SectorCommonBean();
                     }
                     
                     districtBean.setSectors(mSectors);
                     mDistricts.add(districtBean);
                     mSectors = new ArrayList<>();
-                    districtBean = new DistrictBean();
+                    districtBean = new DistrictCommonBean();
                 }
                 provinceBean.setDistricts(mDistricts);
                 mProvince.add(provinceBean);
                 mDistricts = new ArrayList<>();
-                provinceBean = new ProvinceBean();
+                provinceBean = new ProvinceCommonBean();
             }
             
             return RequestResponse.success(DataFactory.objectToString(mProvince));
@@ -152,16 +156,16 @@ public class AppProcessor {
     
     public Response getProvinceByName(String body){
         try{
-            List<DistrictBean> mDistricts = new ArrayList<>();
-            List<SectorBean> mSectors = new ArrayList<>();
-            List<CellBean> mCells = new ArrayList<>();
-            List<StreetBean> mStreets = new ArrayList<>();
+            List<DistrictCommonBean> mDistricts = new ArrayList<>();
+            List<SectorCommonBean> mSectors = new ArrayList<>();
+            List<CellCommonBean> mCells = new ArrayList<>();
+            List<StreetCommonBean> mStreets = new ArrayList<>();
             
-            DistrictBean districtBean = new DistrictBean();
-            SectorBean sectorBean = new SectorBean();
-            CellBean cellBean = new CellBean();
-            StreetBean streetBean;
-            ProvinceBean provinceBean = new ProvinceBean();
+            DistrictCommonBean districtBean = new DistrictCommonBean();
+            SectorCommonBean sectorBean = new SectorCommonBean();
+            CellCommonBean cellBean = new CellCommonBean();
+            StreetCommonBean streetBean;
+            ProvinceCommonBean provinceBean = new ProvinceCommonBean();
             
             List<Street> streets;
             List<Cell> cells;
@@ -212,7 +216,7 @@ public class AppProcessor {
                         
                         if(streets != null){
                             for(Street street : streets){
-                                streetBean = new StreetBean(cell.getId()+"",
+                                streetBean = new StreetCommonBean(cell.getId()+"",
                                         street.getId()+"",
                                         street.getName(),
                                         street.getLongitude() != null ? street.getLongitude() : "",
@@ -223,19 +227,19 @@ public class AppProcessor {
                         cellBean.setStreets(mStreets);
                         mCells.add(cellBean);
                         mStreets = new ArrayList<>();
-                        cellBean = new CellBean();
+                        cellBean = new CellCommonBean();
                     }
                     
                     sectorBean.setCells(mCells);
                     mSectors.add(sectorBean);
                     mCells= new ArrayList<>();
-                    sectorBean = new SectorBean();
+                    sectorBean = new SectorCommonBean();
                 }
                 
                 districtBean.setSectors(mSectors);
                 mDistricts.add(districtBean);
                 mSectors = new ArrayList<>();
-                districtBean = new DistrictBean();
+                districtBean = new DistrictCommonBean();
             }
             provinceBean.setDistricts(mDistricts);
             
@@ -248,16 +252,16 @@ public class AppProcessor {
     
     public Response getProvinceById(String body){
         try{
-            List<DistrictBean> mDistricts = new ArrayList<>();
-            List<SectorBean> mSectors = new ArrayList<>();
-            List<CellBean> mCells = new ArrayList<>();
-            List<StreetBean> mStreets = new ArrayList<>();
+            List<DistrictCommonBean> mDistricts = new ArrayList<>();
+            List<SectorCommonBean> mSectors = new ArrayList<>();
+            List<CellCommonBean> mCells = new ArrayList<>();
+            List<StreetCommonBean> mStreets = new ArrayList<>();
             
-            DistrictBean districtBean = new DistrictBean();
-            SectorBean sectorBean = new SectorBean();
-            CellBean cellBean = new CellBean();
-            StreetBean streetBean;
-            ProvinceBean provinceBean = new ProvinceBean();
+            DistrictCommonBean districtBean = new DistrictCommonBean();
+            SectorCommonBean sectorBean = new SectorCommonBean();
+            CellCommonBean cellBean = new CellCommonBean();
+            StreetCommonBean streetBean;
+            ProvinceCommonBean provinceBean = new ProvinceCommonBean();
             
             List<Street> streets;
             List<Cell> cells;
@@ -308,7 +312,7 @@ public class AppProcessor {
                         
                         if(streets != null){
                             for(Street street : streets){
-                                streetBean = new StreetBean(cell.getId()+"",
+                                streetBean = new StreetCommonBean(cell.getId()+"",
                                         street.getId()+"",
                                         street.getName(),
                                         street.getLongitude() != null ? street.getLongitude() : "",
@@ -319,19 +323,19 @@ public class AppProcessor {
                         cellBean.setStreets(mStreets);
                         mCells.add(cellBean);
                         mStreets = new ArrayList<>();
-                        cellBean = new CellBean();
+                        cellBean = new CellCommonBean();
                     }
                     
                     sectorBean.setCells(mCells);
                     mSectors.add(sectorBean);
                     mCells= new ArrayList<>();
-                    sectorBean = new SectorBean();
+                    sectorBean = new SectorCommonBean();
                 }
                 
                 districtBean.setSectors(mSectors);
                 mDistricts.add(districtBean);
                 mSectors = new ArrayList<>();
-                districtBean = new DistrictBean();
+                districtBean = new DistrictCommonBean();
             }
             provinceBean.setDistricts(mDistricts);
             
@@ -344,13 +348,13 @@ public class AppProcessor {
     
     public Response getDistrictByName(String body){
         try{
-            List<SectorBean> mSectors = new ArrayList<>();
-            List<CellBean> mCells = new ArrayList<>();
-            List<StreetBean> mStreets = new ArrayList<>();
-            DistrictBean districtBean = new DistrictBean();
-            SectorBean sectorBean = new SectorBean();
-            CellBean cellBean = new CellBean();
-            StreetBean streetBean;
+            List<SectorCommonBean> mSectors = new ArrayList<>();
+            List<CellCommonBean> mCells = new ArrayList<>();
+            List<StreetCommonBean> mStreets = new ArrayList<>();
+            DistrictCommonBean districtBean = new DistrictCommonBean();
+            SectorCommonBean sectorBean = new SectorCommonBean();
+            CellCommonBean cellBean = new CellCommonBean();
+            StreetCommonBean streetBean;
             List<Street> streets;
             List<Cell> cells;
             List<Sector> sectors;
@@ -386,7 +390,7 @@ public class AppProcessor {
                     streets = getStreetByCell(cell.getId());
                     if(streets != null){
                         for(Street street : streets){
-                            streetBean = new StreetBean(cell.getId()+"",
+                            streetBean = new StreetCommonBean(cell.getId()+"",
                                     street.getId()+"",
                                     street.getName(),
                                     street.getLongitude() != null ? street.getLongitude() : "",
@@ -397,12 +401,12 @@ public class AppProcessor {
                     cellBean.setStreets(mStreets);
                     mCells.add(cellBean);
                     mStreets = new ArrayList<>();
-                    cellBean = new CellBean();
+                    cellBean = new CellCommonBean();
                 }
                 sectorBean.setCells(mCells);
                 mSectors.add(sectorBean);
                 mCells= new ArrayList<>();
-                sectorBean = new SectorBean();
+                sectorBean = new SectorCommonBean();
             }
             districtBean.setSectors(mSectors);
             
@@ -415,13 +419,13 @@ public class AppProcessor {
     
     public Response getDistrictById(String body){
         try{
-            List<SectorBean> mSectors = new ArrayList<>();
-            List<CellBean> mCells = new ArrayList<>();
-            List<StreetBean> mStreets = new ArrayList<>();
-            DistrictBean districtBean = new DistrictBean();
-            SectorBean sectorBean = new SectorBean();
-            CellBean cellBean = new CellBean();
-            StreetBean streetBean;
+            List<SectorCommonBean> mSectors = new ArrayList<>();
+            List<CellCommonBean> mCells = new ArrayList<>();
+            List<StreetCommonBean> mStreets = new ArrayList<>();
+            DistrictCommonBean districtBean = new DistrictCommonBean();
+            SectorCommonBean sectorBean = new SectorCommonBean();
+            CellCommonBean cellBean = new CellCommonBean();
+            StreetCommonBean streetBean;
             List<Street> streets;
             List<Cell> cells;
             List<Sector> sectors;
@@ -458,7 +462,7 @@ public class AppProcessor {
                     
                     if(streets != null){
                         for(Street street : streets){
-                            streetBean = new StreetBean(cell.getId()+"",
+                            streetBean = new StreetCommonBean(cell.getId()+"",
                                     street.getId()+"",
                                     street.getName(),
                                     street.getLongitude() != null ? street.getLongitude() : "",
@@ -469,12 +473,12 @@ public class AppProcessor {
                     cellBean.setStreets(mStreets);
                     mCells.add(cellBean);
                     mStreets = new ArrayList<>();
-                    cellBean = new CellBean();
+                    cellBean = new CellCommonBean();
                 }
                 sectorBean.setCells(mCells);
                 mSectors.add(sectorBean);
                 mCells= new ArrayList<>();
-                sectorBean = new SectorBean();
+                sectorBean = new SectorCommonBean();
             }
             districtBean.setSectors(mSectors);
             
@@ -487,12 +491,12 @@ public class AppProcessor {
     
     public Response getSectorByName(String body){
         try{
-            List<SectorBean> mSectors = new ArrayList<>();
-            List<CellBean> mCells = new ArrayList<>();
-            List<StreetBean> mStreets = new ArrayList<>();
-            SectorBean sectorBean = new SectorBean();
-            CellBean cellBean = new CellBean();
-            StreetBean streetBean;
+            List<SectorCommonBean> mSectors = new ArrayList<>();
+            List<CellCommonBean> mCells = new ArrayList<>();
+            List<StreetCommonBean> mStreets = new ArrayList<>();
+            SectorCommonBean sectorBean = new SectorCommonBean();
+            CellCommonBean cellBean = new CellCommonBean();
+            StreetCommonBean streetBean;
             List<Street> streets;
             List<Cell> cells;
             List<Sector> sectors;
@@ -517,7 +521,7 @@ public class AppProcessor {
                     streets = getStreetByCell(cell.getId());
                     if(streets != null){
                         for(Street street : streets){
-                            streetBean = new StreetBean(cell.getId()+"",
+                            streetBean = new StreetCommonBean(cell.getId()+"",
                                     street.getId()+"",
                                     street.getName(),
                                     street.getLongitude() != null ? street.getLongitude() : "",
@@ -528,12 +532,12 @@ public class AppProcessor {
                     cellBean.setStreets(mStreets);
                     mCells.add(cellBean);
                     mStreets = new ArrayList<>();
-                    cellBean = new CellBean();
+                    cellBean = new CellCommonBean();
                 }
                 sectorBean.setCells(mCells);
                 mSectors.add(sectorBean);
                 mCells= new ArrayList<>();
-                sectorBean = new SectorBean();
+                sectorBean = new SectorCommonBean();
             }
             return RequestResponse.success(DataFactory.objectToString(mSectors));
         }catch(Exception e){
@@ -544,11 +548,11 @@ public class AppProcessor {
     
     public Response getSectorById(String body){
         try{
-            List<CellBean> mCells = new ArrayList<>();
-            List<StreetBean> mStreets = new ArrayList<>();
-            SectorBean sectorBean = new SectorBean();
-            CellBean cellBean = new CellBean();
-            StreetBean streetBean;
+            List<CellCommonBean> mCells = new ArrayList<>();
+            List<StreetCommonBean> mStreets = new ArrayList<>();
+            SectorCommonBean sectorBean = new SectorCommonBean();
+            CellCommonBean cellBean = new CellCommonBean();
+            StreetCommonBean streetBean;
             List<Street> streets;
             List<Cell> cells;
             Sector sector = getSectorId(stringToLong(body));
@@ -571,7 +575,7 @@ public class AppProcessor {
                 streets = getStreetByCell(cell.getId());
                 if(streets != null){
                     for(Street street : streets){
-                        streetBean = new StreetBean(
+                        streetBean = new StreetCommonBean(
                                 cell.getId()+"",
                                 street.getId()+"",
                                 street.getName(),
@@ -583,7 +587,7 @@ public class AppProcessor {
                 cellBean.setStreets(mStreets);
                 mCells.add(cellBean);
                 mStreets = new ArrayList<>();
-                cellBean = new CellBean();
+                cellBean = new CellCommonBean();
             }
             sectorBean.setCells(mCells);
             return RequestResponse.success(DataFactory.objectToString(sectorBean));
@@ -595,10 +599,10 @@ public class AppProcessor {
     
     public Response getCellByName(String body){
         try{
-            List<CellBean> mCells = new ArrayList<>();
-            List<StreetBean> mStreets = new ArrayList<>();
-            CellBean cellBean = new CellBean();
-            StreetBean streetBean;
+            List<CellCommonBean> mCells = new ArrayList<>();
+            List<StreetCommonBean> mStreets = new ArrayList<>();
+            CellCommonBean cellBean = new CellCommonBean();
+            StreetCommonBean streetBean;
             List<Street> streets;
             List<Cell> cells;
             cells = getCellName(body);
@@ -613,7 +617,7 @@ public class AppProcessor {
                 streets = getStreetByCell(cell.getId());
                 if(streets != null){
                     for(Street street : streets){
-                        streetBean = new StreetBean(
+                        streetBean = new StreetCommonBean(
                                 cell.getId()+"",
                                 street.getId()+"",
                                 street.getName(),
@@ -625,7 +629,7 @@ public class AppProcessor {
                 cellBean.setStreets(mStreets);
                 mCells.add(cellBean);
                 mStreets = new ArrayList<>();
-                cellBean = new CellBean();
+                cellBean = new CellCommonBean();
             }
             return RequestResponse.success(DataFactory.objectToString(mCells));
         }catch(Exception e){
@@ -636,9 +640,9 @@ public class AppProcessor {
     
     public Response getCellById(String body){
         try{
-            List<StreetBean> mStreets = new ArrayList<>();
-            CellBean cellBean = new CellBean();
-            StreetBean streetBean;
+            List<StreetCommonBean> mStreets = new ArrayList<>();
+            CellCommonBean cellBean = new CellCommonBean();
+            StreetCommonBean streetBean;
             List<Street> streets;
             Cell cell = getCellId(stringToLong(body));
             if(cell == null){
@@ -653,7 +657,7 @@ public class AppProcessor {
             
             if(streets != null){
                 for(Street street : streets){
-                    streetBean = new StreetBean(
+                    streetBean = new StreetCommonBean(
                             cell.getId()+"",
                             street.getId()+"",
                             street.getName(),
@@ -669,6 +673,228 @@ public class AppProcessor {
             return RequestResponse.faillure(Response.Status.EXPECTATION_FAILED, e.getLocalizedMessage());
         }
     }
+    
+    //SPECS
+    public Response getAllDataSpecs(){
+        try{
+            List<ProvinceBean> mProvince = new ArrayList<>();
+            
+            List<Province> provinces = getAllProvince();
+            if(provinces == null){
+                out.print(AppDesc.APP_DESC+" AppProcessor getAllDataSpecs failed due to: empty province results");
+                return RequestResponse.faillure(Response.Status.EXPECTATION_FAILED, "Province not found.");
+            }
+            
+            for(Province province : provinces){
+                mProvince.add(new ProvinceBean(province.getId()+"", province.getName()));
+            }
+            return RequestResponse.success(DataFactory.objectToString(mProvince));
+        }catch(Exception e){
+            out.print(AppDesc.APP_DESC+" AppProcessor getAllDataSpecs failed due to: "+e.getMessage());
+            return RequestResponse.faillure(Response.Status.EXPECTATION_FAILED, e.getLocalizedMessage());
+        }
+    }
+    
+    public Response getProvinceByNameSpecs(String body){
+        try{
+            List<ProvinceBean> mProvince = new ArrayList<>();
+            
+            Province province = getProvinceName(body);
+            if(province == null){
+                out.print(AppDesc.APP_DESC+" AppProcessor getProvinceByNameSpecs failed due to: empty province results");
+                return RequestResponse.faillure(Response.Status.EXPECTATION_FAILED, "Province not found.");
+            }
+            
+            
+            return RequestResponse.success(DataFactory.objectToString(new ProvinceBean(province.getId()+"", province.getName())));
+        }catch(Exception e){
+            out.print(AppDesc.APP_DESC+" AppProcessor getProvinceByNameSpecs failed due to: "+e.getMessage());
+            return RequestResponse.faillure(Response.Status.EXPECTATION_FAILED, e.getLocalizedMessage());
+        }
+    }
+    
+    public Response getProvinceByIdSpecs(String body){
+        try{
+            Province province = getProvinceId(stringToLong(body));
+            if(province == null){
+                out.print(AppDesc.APP_DESC+" AppProcessor getProvinceByIdSpecs failed due to: empty province results");
+                return RequestResponse.faillure(Response.Status.EXPECTATION_FAILED, "Province not found.");
+            }
+            
+            
+            return RequestResponse.success(DataFactory.objectToString(new ProvinceBean(province.getId()+"", province.getName())));
+        }catch(Exception e){
+            out.print(AppDesc.APP_DESC+" AppProcessor getProvinceByIdSpecs failed due to: "+e.getMessage());
+            return RequestResponse.faillure(Response.Status.EXPECTATION_FAILED, e.getLocalizedMessage());
+        }
+    }
+    
+    public Response getDistrictByNameSpecs(String body){
+        try{
+            
+            District district = getDistrictName(body);
+            if(district == null){
+                out.print(AppDesc.APP_DESC+" AppProcessor getAllData failed due to: empty district results");
+                return RequestResponse.faillure(Response.Status.EXPECTATION_FAILED, "District not found.");
+            }
+            
+            return RequestResponse.success(DataFactory.objectToString(new DistrictBean(district.getProvinceId()+"", district.getId()+"", district.getName())));
+        }catch(Exception e){
+            out.print(AppDesc.APP_DESC+" AppProcessor getProvinceByName failed due to: "+e.getMessage());
+            return RequestResponse.faillure(Response.Status.EXPECTATION_FAILED, e.getLocalizedMessage());
+        }
+    }
+    
+    public Response getDistrictByIdSpecs(String body){
+        try{
+            
+            District district = getDistrictId(stringToLong(body));
+            if(district == null){
+                out.print(AppDesc.APP_DESC+" AppProcessor getAllData failed due to: empty district results");
+                return RequestResponse.faillure(Response.Status.EXPECTATION_FAILED, "District not found.");
+            }
+            
+            return RequestResponse.success(DataFactory.objectToString(new DistrictBean(district.getProvinceId()+"", district.getId()+"", district.getName())));
+        }catch(Exception e){
+            out.print(AppDesc.APP_DESC+" AppProcessor getProvinceByName failed due to: "+e.getMessage());
+            return RequestResponse.faillure(Response.Status.EXPECTATION_FAILED, e.getLocalizedMessage());
+        }
+    }
+    
+    public Response getSectorByNameSpecs(String body){
+        try{
+            List<SectorBean> mSectors = new ArrayList<>();
+            
+            List<Sector> sectors = getSectorName(body);
+            if(sectors == null){
+                out.print(AppDesc.APP_DESC+" AppProcessor getSectorByNameSpecs failed due to: empty sector results");
+                return RequestResponse.faillure(Response.Status.EXPECTATION_FAILED, "Sector not found.");
+            }
+            for(Sector sector : sectors){
+                mSectors.add(new SectorBean(sector.getId()+"", sector.getId()+"", sector.getName()));
+            }
+            return RequestResponse.success(DataFactory.objectToString(mSectors));
+        }catch(Exception e){
+            out.print(AppDesc.APP_DESC+" AppProcessor getSectorByNameSpecs failed due to: "+e.getMessage());
+            return RequestResponse.faillure(Response.Status.EXPECTATION_FAILED, e.getLocalizedMessage());
+        }
+    }
+    
+    public Response getSectorByIdSpecs(String body){
+        try{
+            
+            Sector sector = getSectorId(stringToLong(body));
+            if(sector == null){
+                out.print(AppDesc.APP_DESC+" AppProcessor getSectorByIdSpecs failed due to: empty sector results");
+                return RequestResponse.faillure(Response.Status.EXPECTATION_FAILED, "Sector not found.");
+            }
+            return RequestResponse.success(DataFactory.objectToString(new SectorBean(sector.getId()+"", sector.getId()+"", sector.getName())));
+        }catch(Exception e){
+            out.print(AppDesc.APP_DESC+" AppProcessor getSectorByIdSpecs failed due to: "+e.getMessage());
+            return RequestResponse.faillure(Response.Status.EXPECTATION_FAILED, e.getLocalizedMessage());
+        }
+    }
+    
+    public Response getCellByNameSpecs(String body){
+        try{
+            List<CellBean> mCells = new ArrayList<>();
+            List<Cell> cells = getCellName(body);
+            if(cells == null){
+                out.print(AppDesc.APP_DESC+" AppProcessor getCellByNameSpecs failed due to: empty cell results");
+                return RequestResponse.faillure(Response.Status.EXPECTATION_FAILED, "Cells not found.");
+            }
+            for(Cell cell : cells){
+                mCells.add(new CellBean(cell.getSectorId()+"", cell.getId()+"", cell.getName()));
+            }
+            return RequestResponse.success(DataFactory.objectToString(mCells));
+        }catch(Exception e){
+            out.print(AppDesc.APP_DESC+" AppProcessor getCellByNameSpecs failed due to: "+e.getMessage());
+            return RequestResponse.faillure(Response.Status.EXPECTATION_FAILED, e.getLocalizedMessage());
+        }
+    }
+    
+    public Response getCellByIdSpecs(String body){
+        try{
+            Cell cell = getCellId(stringToLong(body));
+            if(cell == null){
+                out.print(AppDesc.APP_DESC+" AppProcessor getAllData failed due to: empty cell results");
+                return RequestResponse.faillure(Response.Status.EXPECTATION_FAILED, "Cell not found.");
+            }
+            
+            return RequestResponse.success(DataFactory.objectToString(new CellBean(cell.getSectorId()+"", cell.getId()+"", cell.getName())));
+        }catch(Exception e){
+            out.print(AppDesc.APP_DESC+" AppProcessor getProvinceByName failed due to: "+e.getMessage());
+            return RequestResponse.faillure(Response.Status.EXPECTATION_FAILED, e.getLocalizedMessage());
+        }
+    }
+    
+    public Response getProvinceDistricts(String body){
+        try{
+            Province province = getProvinceId(stringToLong(body));
+            if(province == null){
+                out.print(AppDesc.APP_DESC+" AppProcessor getProvinceDistricts failed due to: empty province results");
+                return RequestResponse.faillure(Response.Status.EXPECTATION_FAILED, "Province not found.");
+            }
+            List<District> mDistrict = districtFacade.getDistrictByProvince(province.getId());
+            if(mDistrict == null){
+                out.print(AppDesc.APP_DESC+" AppProcessor getProvinceDistricts failed due to: empty Districts results");
+                return RequestResponse.faillure(Response.Status.EXPECTATION_FAILED, "Districts not found.");
+            }
+            List<DistrictBean> districtBeans = new ArrayList<>();
+            for(District district : mDistrict){
+                districtBeans.add(new DistrictBean(district.getProvinceId()+"", district.getId()+"", district.getName()));
+            }
+            return RequestResponse.success(DataFactory.objectToString(districtBeans));
+        }catch(Exception e){
+            out.print(AppDesc.APP_DESC+" AppProcessor getProvinceDistricts failed due to: "+e.getMessage());
+            return RequestResponse.faillure(Response.Status.EXPECTATION_FAILED, e.getLocalizedMessage());
+        }
+    }
+    public Response getDistrictSectors(String body){
+        try{
+            District district = getDistrictId(stringToLong(body));
+            if(district == null){
+                out.print(AppDesc.APP_DESC+" AppProcessor getDistrictSectors failed due to: empty District results");
+                return RequestResponse.faillure(Response.Status.EXPECTATION_FAILED, "District not found.");
+            }
+            List<Sector> mSector = sectorFacade.getSectorByDistrict(district.getId());
+            if(mSector == null){
+                out.print(AppDesc.APP_DESC+" AppProcessor getDistrictSectors failed due to: empty Sectors results");
+                return RequestResponse.faillure(Response.Status.EXPECTATION_FAILED, "Sectors not found.");
+            }
+            List<SectorBean> sectorBeans = new ArrayList<>();
+            for(Sector sector : mSector){
+                sectorBeans.add(new SectorBean(sector.getDistrictId()+"", sector.getId()+"", sector.getName()));
+            }
+            return RequestResponse.success(DataFactory.objectToString(sectorBeans));
+        }catch(Exception e){
+            out.print(AppDesc.APP_DESC+" AppProcessor getDistrictSectors failed due to: "+e.getMessage());
+            return RequestResponse.faillure(Response.Status.EXPECTATION_FAILED, e.getLocalizedMessage());
+        }
+    }
+    public Response getSectorCells(String body){
+        try{
+            Sector sector = getSectorId(stringToLong(body));
+            if(sector == null){
+                out.print(AppDesc.APP_DESC+" AppProcessor getGetSectorCells failed due to: empty sector results");
+                return RequestResponse.faillure(Response.Status.EXPECTATION_FAILED, "Sector not found.");
+            }
+            List<Cell> mCell = cellFacade.getListCellBySector(sector.getId());
+            if(mCell == null){
+                out.print(AppDesc.APP_DESC+" AppProcessor getGetSectorCells failed due to: empty cell results");
+                return RequestResponse.faillure(Response.Status.EXPECTATION_FAILED, "Sectors not found.");
+            }
+            List<CellBean> cellBeans = new ArrayList<>();
+            for(Cell cell : mCell){
+                cellBeans.add(new CellBean(cell.getSectorId()+"", cell.getId()+"", cell.getName()));
+            }
+            return RequestResponse.success(DataFactory.objectToString(cellBeans));
+        }catch(Exception e){
+            out.print(AppDesc.APP_DESC+" AppProcessor getGetSectorCells failed due to: "+e.getMessage());
+            return RequestResponse.faillure(Response.Status.EXPECTATION_FAILED, e.getLocalizedMessage());
+        }
+    }
+    
     
     private List<Province> getAllProvince(){
         List<Province> provinces = provinceFacade.getAllData();

@@ -33,8 +33,35 @@ public class CommandValidator {
                 return true;
             case CommandConfig.GET_CELL_BY_ID:
                 return true;
+                
+                //SPECS
+            case CommandConfig.GET_ALL_SPECS:
+                return true;
+            case CommandConfig.GET_PROVINCE_BY_NAME_SPECS:
+                return true;
+            case CommandConfig.GET_PROVINCE_BY_ID_SPECS:
+                return true;
+            case CommandConfig.GET_DISTRICT_BY_NAME_SPECS:
+                return true;
+            case CommandConfig.GET_DISTRICT_BY_ID_SPECS:
+                return true;
+            case CommandConfig.GET_SECTOR_BY_NAME_SPECS:
+                return true;
+            case CommandConfig.GET_SECTOR_BY_ID_SPECS:
+                return true;
+            case CommandConfig.GET_CELL_BY_NAME_SPECS:
+                return true;
+            case CommandConfig.GET_CELL_BY_ID_SPECS:
+                return true;
+                //specs
+            case CommandConfig.GET_PROVINCE_DISTRICTS:
+                return true;
+            case CommandConfig.GET_DISTRICT_SECTORS:
+                return true;
+            case CommandConfig.GET_SECTOR_CELLS:
+                return true;
             default:
-                return false;                
+                return false;
         }
     }
 }

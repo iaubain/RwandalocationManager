@@ -12,27 +12,27 @@ import java.util.List;
  * @author ISHIMWE Aubain Consolateur. email: iaubain@yahoo.fr /
  * aubain.c.ishimwe@oltranz.com Tel: +250 785 534 672 / +250 736 864 662
  */
-public class DistrictBean {
+public class DistrictCommonBean {
     private String provinceId;
     private String districtId;
     private String name;
-    private List<SectorBean> sectors;
+    private List<SectorCommonBean> sectors;
 
-    public DistrictBean() {
+    public DistrictCommonBean() {
     }
 
-    public DistrictBean(String provinceId, String districtId, String name, List<SectorBean> sectors) {
+    public DistrictCommonBean(String provinceId, String districtId, String name, List<SectorCommonBean> sectors) {
         this.provinceId = provinceId;
         this.districtId = districtId;
         this.name = name;
         this.sectors = sectors;
     }
 
-    public List<SectorBean> getSectors() {
+    public List<SectorCommonBean> getSectors() {
         return sectors;
     }
 
-    public void setSectors(List<SectorBean> sectors) {
+    public void setSectors(List<SectorCommonBean> sectors) {
         this.sectors = sectors;
     }
 

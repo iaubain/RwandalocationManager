@@ -3,9 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.oltranz.location.simplebean.commonbean;
-
-import java.util.List;
+package com.oltranz.location.simplebean.sector;
 
 /**
  *
@@ -16,24 +14,22 @@ public class SectorBean {
     private String districtId;
     private String sectorId;
     private String name;
-    private List<CellBean> cells;
 
     public SectorBean() {
     }
 
-    public SectorBean(String districtId, String sectorId, String name, List<CellBean> cells) {
+    public SectorBean(String districtId, String sectorId, String name) {
         this.districtId = districtId;
         this.sectorId = sectorId;
         this.name = name;
-        this.cells = cells;
     }
 
-    public List<CellBean> getCells() {
-        return cells;
+    public String getDistrictId() {
+        return districtId;
     }
 
-    public void setCells(List<CellBean> cells) {
-        this.cells = cells;
+    public void setDistrictId(String districtId) {
+        this.districtId = districtId;
     }
 
     public String getSectorId() {
@@ -50,14 +46,6 @@ public class SectorBean {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getDistrictId() {
-        return districtId;
-    }
-
-    public void setDistrictId(String districtId) {
-        this.districtId = districtId;
     }
     
 }

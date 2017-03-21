@@ -3,9 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.oltranz.location.simplebean.commonbean;
-
-import java.util.List;
+package com.oltranz.location.simplebean.province;
 
 /**
  *
@@ -15,23 +13,13 @@ import java.util.List;
 public class ProvinceBean {
     private String provinceId;
     private String name;
-    private List<DistrictBean> districts;
 
     public ProvinceBean() {
     }
 
-    public ProvinceBean(String provinceId, String name, List<DistrictBean> districts) {
+    public ProvinceBean(String provinceId, String name) {
         this.provinceId = provinceId;
         this.name = name;
-        this.districts = districts;
-    }
-
-    public List<DistrictBean> getDistricts() {
-        return districts;
-    }
-
-    public void setDistricts(List<DistrictBean> districts) {
-        this.districts = districts;
     }
 
     public String getProvinceId() {

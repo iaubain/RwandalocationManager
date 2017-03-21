@@ -3,9 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.oltranz.location.simplebean.commonbean;
-
-import java.util.List;
+package com.oltranz.location.simplebean.cell;
 
 /**
  *
@@ -16,39 +14,13 @@ public class CellBean {
     private String sectorId;
     private String cellId;
     private String cellName;
-    private List<StreetBean> streets;
 
     public CellBean() {
     }
 
-    public CellBean(String sectorId, String cellId, String cellName, List<StreetBean> streets) {
+    public CellBean(String sectorId, String cellId, String cellName) {
         this.sectorId = sectorId;
         this.cellId = cellId;
-        this.cellName = cellName;
-        this.streets = streets;
-    }
-
-    public List<StreetBean> getStreets() {
-        return streets;
-    }
-
-    public void setStreets(List<StreetBean> streets) {
-        this.streets = streets;
-    }
-
-    public String getCellId() {
-        return cellId;
-    }
-
-    public void setCellId(String cellId) {
-        this.cellId = cellId;
-    }
-    
-    public String getCellName() {
-        return cellName;
-    }
-
-    public void setCellName(String cellName) {
         this.cellName = cellName;
     }
 
@@ -58,6 +30,22 @@ public class CellBean {
 
     public void setSectorId(String sectorId) {
         this.sectorId = sectorId;
+    }
+
+    public String getCellId() {
+        return cellId;
+    }
+
+    public void setCellId(String cellId) {
+        this.cellId = cellId;
+    }
+
+    public String getCellName() {
+        return cellName;
+    }
+
+    public void setCellName(String cellName) {
+        this.cellName = cellName;
     }
     
 }
